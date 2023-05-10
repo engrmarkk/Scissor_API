@@ -1,13 +1,12 @@
-from marshmallow import Schema, validate, ValidationError, \
-    validates_schema, post_load, fields
-from ..models import User
+from marshmallow import Schema, ValidationError, \
+    validates_schema, fields
 
 
 class UserSchema(Schema):
     id = fields.Integer(dump_only=True)
     username = fields.String(required=True)
-    first_name = fields.String()
-    last_name = fields.String()
+    first_name = fields.String(required=True)
+    last_name = fields.String(required=True)
     email = fields.Email(required=True)
     password = fields.String(required=True, load_only=True)
     confirm_password = fields.String(load_only=True, required=True)
