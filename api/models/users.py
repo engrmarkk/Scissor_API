@@ -11,9 +11,12 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     user_links = db.relationship('Link', backref='user', lazy=True)
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, email, first_name, last_name):
         self.username = username
         self.password = password
+        self.email = email
+        self.first_name = first_name
+        self.last_name = last_name
 
     def __repr__(self):
         return f'<User {self.username}>'
