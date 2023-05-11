@@ -1,13 +1,12 @@
-from ..models import User
+from ..models import User, RevokedToken
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from ..schemas import UserSchema, LoginSchema
 from flask_jwt_extended import create_access_token, \
-    create_refresh_token
+    create_refresh_token, get_jwt_identity, jwt_required
 from ..utils import check_if_email_is_unique, check_if_username_is_unique
 from passlib.hash import pbkdf2_sha256 as sha256
 from datetime import timedelta
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..extensions import cache
 
 bp = Blueprint('auth', __name__, description='Operations on users')
@@ -65,7 +64,22 @@ class LoginUserResource(MethodView):
         access_token = cache.get(current_user.id)
         if not access_token:
             access_token = create_access_token(identity=current_user.id)
-            cache.set(current_user.id, access_token)
+            cache.set(current_user.id, access_token, timeout=None)
         refresh_token = create_refresh_token(identity=current_user.id)
         return {'access_token': access_token,
                 'refresh_token': refresh_token}
+
+
+@bp.route('/logout')
+class LogoutUserResource(MethodView):
+    @bp.doc(description="Logout a user",
+            summary="Logout a user by revoking their access token")
+    @jwt_required()
+    def post(self):
+        jti = get_jwt_identity()
+        revoked_token = RevokedToken(jti=jti)
+        revoked_token.save()
+        cached_token = cache.get(jti)
+        if cached_token:
+            cache.delete(jti)
+        return {"message": "Successfully logged out"}
