@@ -1,11 +1,11 @@
-from ..models import User, Link
+from ..models import Link
 from flask_smorest import abort, Blueprint
-from flask import redirect, make_response, request, jsonify
+from flask import redirect, make_response, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask.views import MethodView
 from ..schemas import LinkSchema, GetLinks
 from ..utils.url_validate import validate_url
-from ..utils import check_if_user_is_still_logged_in
+# from ..utils import check_if_user_is_still_logged_in
 from ..extensions import db, cache
 
 
@@ -65,7 +65,6 @@ def qr_code(short_url):
 def GetLinks():
     # Check if token is valid
     current_user = get_jwt_identity()
-    print(current_user)
     # check_if_user_is_still_logged_in(current_user)
     links = Link.query.filter_by(user_id=current_user).all()
     return links
