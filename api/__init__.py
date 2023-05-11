@@ -44,10 +44,12 @@ def create_app(configure=config_object['appcon']):
             401,
         )
 
+    # Callback function to check if a JWT exists in the database blocklist
     @jwt.token_in_blocklist_loader
-    def check_if_token_revoked(decoded_token):
-        jti = decoded_token['jti']
+    def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+        jti = jwt_payload["jti"]
         token = db.session.query(RevokedToken.id).filter_by(jti=jti).scalar()
+
         return token is not None
 
     @jwt.expired_token_loader
