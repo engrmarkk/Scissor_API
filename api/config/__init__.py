@@ -16,6 +16,10 @@ class Config:
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     # This is the secret key for the jwt
     JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret")
+
+    CACHE_TYPE = 'SimpleCache'
+    CACHE_DEFAULT_TIMEOUT = 300
+
     # the api title
     API_TITLE = 'Scissor API'
     API_VERSION = 'v1'
