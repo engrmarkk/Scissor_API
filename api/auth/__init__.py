@@ -8,6 +8,7 @@ from ..utils import check_if_email_is_unique, check_if_username_is_unique
 from passlib.hash import pbkdf2_sha256 as sha256
 from datetime import timedelta
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from ..extensions import cache
 
 bp = Blueprint('auth', __name__, description='Operations on users')
 
@@ -61,7 +62,10 @@ class LoginUserResource(MethodView):
             abort(404, message='User not found')
         if not sha256.verify(user['password'], current_user.password):
             abort(401, message='Invalid credentials')
-        access_token = create_access_token(identity=current_user.username)
-        refresh_token = create_refresh_token(identity=current_user.username)
+        access_token = cache.get(current_user.id)
+        if not access_token:
+            access_token = create_access_token(identity=current_user.id)
+            cache.set(current_user.id, access_token)
+        refresh_token = create_refresh_token(identity=current_user.id)
         return {'access_token': access_token,
                 'refresh_token': refresh_token}
