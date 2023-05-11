@@ -4,6 +4,12 @@ import string
 import qrcode
 from io import BytesIO
 from PIL import Image
+from datetime import datetime
+
+
+def generate_current_date():
+    current_date = f'{datetime.now().day}-{datetime.now().month}-{datetime.now().year}'
+    return current_date
 
 
 class Link(db.Model):
@@ -14,6 +20,10 @@ class Link(db.Model):
     visit = db.Column(db.Integer, default=0)
     qr_code = db.Column(db.LargeBinary)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    date_created = db.Column(db.String(20), default=generate_current_date())
+
+    # Define your prefix here
+    # PREFIX = "https://localhost:5000/"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -24,6 +34,7 @@ class Link(db.Model):
         return f'<Link {self.url}>'
 
     def save(self):
+        # self.short_url=self.create_short_url()
         db.session.add(self)
         db.session.commit()
 
@@ -47,5 +58,5 @@ class Link(db.Model):
         buffer = BytesIO()
         img.save(buffer, format='JPEG')
         buffer.seek(0)
-        img = Image.open(buffer)
-        return img
+        qr_code = buffer.getvalue()
+        return qr_code
