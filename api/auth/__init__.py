@@ -1,9 +1,11 @@
+from flask import jsonify
+
 from ..models import User, RevokedToken
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from ..schemas import UserSchema, LoginSchema
 from flask_jwt_extended import create_access_token, \
-    create_refresh_token, get_jwt_identity, jwt_required
+    create_refresh_token, get_jwt_identity, jwt_required, get_jwt
 from ..utils import check_if_email_is_unique, check_if_username_is_unique
 from passlib.hash import pbkdf2_sha256 as sha256
 from datetime import timedelta
@@ -70,16 +72,16 @@ class LoginUserResource(MethodView):
                 'refresh_token': refresh_token}
 
 
-@bp.route('/logout')
-class LogoutUserResource(MethodView):
-    @bp.doc(description="Logout a user",
-            summary="Logout a user by revoking their access token")
-    @jwt_required()
-    def post(self):
-        jti = get_jwt_identity()
-        revoked_token = RevokedToken(jti=jti)
-        revoked_token.save()
-        cached_token = cache.get(jti)
-        if cached_token:
-            cache.delete(jti)
-        return {"message": "Successfully logged out"}
+@bp.route('/logout', methods=['DELETE'])
+@bp.doc(description="Logout a user",
+        summary="Logout a user by revoking their access token")
+@jwt_required()
+def revoke_auth():
+    jti = get_jwt()["jti"]
+    current_user = get_jwt_identity()
+    cached_data = cache.get(current_user)
+    if cached_data:
+        cache.delete(current_user)
+    token = RevokedToken(jti=jti)
+    token.save()
+    return jsonify(msg="Successfully logged out")
