@@ -46,6 +46,8 @@ class RedirectShortUrl(MethodView):
 
 
 @bp.route('/<short_url>/qr-code')
+@jwt_required()
+@cache.cached(timeout=3600)
 def qr_code(short_url):
     """Get the QR code for a short url"""
     link = Link.query.filter_by(short_url=short_url).first_or_404()
