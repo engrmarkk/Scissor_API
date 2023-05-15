@@ -1,10 +1,11 @@
-from .extensions import db, migrate, jwt, api, cors, cache
+from .extensions import db, migrate, jwt, api, cache
 from .config import config_object
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from .models import User, Link, RevokedToken
 from .auth import bp as auth_bp
 from .views.users import bp as users_bp
 from .views.url import bp as url_bp
+from flask_cors import CORS
 
 
 def create_app(configure=config_object['appcon']):
@@ -13,9 +14,18 @@ def create_app(configure=config_object['appcon']):
     db.init_app(app)
     migrate.init_app(app, db)
     api.init_app(app)
-    cors.init_app(app)
+    # Enable CORS
+    CORS(app, resupports_credentials=True)
     cache.init_app(app)
     jwt.init_app(app)
+
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
     @jwt.revoked_token_loader
     def revoked_token_callback(jwt_header, jwt_payload):
@@ -83,6 +93,10 @@ def create_app(configure=config_object['appcon']):
     api.register_blueprint(auth_bp)
     api.register_blueprint(users_bp)
     api.register_blueprint(url_bp)
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return make_response(jsonify({"error": "Not found"}), 404)
 
     @app.shell_context_processor
     def make_shell_context():
