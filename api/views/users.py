@@ -4,10 +4,10 @@ from flask_jwt_extended import jwt_required
 from flask.views import MethodView
 from ..schemas import UserSchema
 
-bp = Blueprint('users', __name__, description='Operations on users')
+bp = Blueprint("users", __name__, description="Operations on users")
 
 
-@bp.route('/users')
+@bp.route("/users")
 class UsersResource(MethodView):
     @bp.response(200, UserSchema(many=True))
     # @jwt_required()
