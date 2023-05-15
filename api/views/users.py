@@ -10,7 +10,7 @@ bp = Blueprint('users', __name__, description='Operations on users')
 @bp.route('/users')
 class UsersResource(MethodView):
     @bp.response(200, UserSchema(many=True))
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         """Get all users"""
         users = User.query.all()
