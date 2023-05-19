@@ -64,21 +64,10 @@ def qr_code(short_url):
 @bp.route("/all-links")
 @bp.response(200, GetLinksSchema(many=True))
 @jwt_required()
-@cache.cached(timeout=3600)
+@cache.cached(timeout=60)
 def GetLinks():
     # Check if token is valid
     current_user = get_jwt_identity()
     # check_if_user_is_still_logged_in(current_user)
     links = Link.query.filter_by(user_id=current_user).all()
     return links
-
-
-@bp.route("/get-links")
-class GetUserLinks(MethodView):
-    @bp.response(200, GetLinksSchema(many=True))
-    @jwt_required()
-    def get(self):
-        """Get the current user's dashboard"""
-        current_user = get_jwt_identity()
-        user_links = Link.query.filter_by(user_id=current_user).all()
-        return user_links
