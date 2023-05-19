@@ -1,2 +1,2 @@
 from .user import UserSchema, LoginSchema
-from .link import LinkSchema, GetLinks
+from .link import LinkSchema, GetLinksSchema
