@@ -9,7 +9,7 @@ class LinkSchema(Schema):
     created_at = fields.DateTime(dump_only=True)
 
 
-class GetLinks(Schema):
+class GetLinksSchema(Schema):
     id = fields.Integer()
     user_id = fields.Integer()
     url = fields.String()
