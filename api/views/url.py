@@ -55,7 +55,7 @@ def qr_code(short_url):
     if not link.qr_code:
         # If the QR code hasn't been generated yet, generate it now
         link.qr_code = link.generate_qr_code()
-        link.save()
+        db.session.commit()
     response = make_response(link.qr_code)
     response.headers.set("Content-Type", "image/jpeg")
     return response
