@@ -3,7 +3,7 @@ from flask_smorest import abort, Blueprint
 from flask import redirect, make_response, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask.views import MethodView
-from ..schemas import LinkSchema, GetLinks
+from ..schemas import LinkSchema, GetLinksSchema
 from ..utils.url_validate import validate_url
 
 # from ..utils import check_if_user_is_still_logged_in
@@ -62,7 +62,7 @@ def qr_code(short_url):
 
 
 @bp.route("/all-links")
-@bp.response(200, GetLinks(many=True))
+@bp.response(200, GetLinksSchema(many=True))
 @jwt_required()
 @cache.cached(timeout=3600)
 def GetLinks():
@@ -74,17 +74,11 @@ def GetLinks():
 
 
 @bp.route("/get-links")
-class GetLinks(MethodView):
-    @bp.response(200, GetLinks(many=True))
+class GetUserLinks(MethodView):
+    @bp.response(200, GetLinksSchema(many=True))
     @jwt_required()
     def get(self):
         """Get the current user's dashboard"""
-        links = {}
         current_user = get_jwt_identity()
         user_links = Link.query.filter_by(user_id=current_user).all()
-        # for link in user_links:
-        #     links[link.url] = link.url
-        #     links[link.short_url] = link.short_url
-        #     links[link.visit] = link.visit
-        # return links
         return user_links
