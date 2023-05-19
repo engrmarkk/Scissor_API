@@ -7,7 +7,7 @@ class LinkSchema(Schema):
     user_id = fields.Integer(dump_only=True)
     url = fields.String(required=True)
     short_url = fields.String(dump_only=True)
-    created_at = fields.DateTime(dump_only=True)
+    date_created = fields.String(dump_only=True)
 
 
 class GetLinksSchema(Schema):
@@ -16,7 +16,7 @@ class GetLinksSchema(Schema):
     url = fields.String()
     short_url = fields.String()
     visit = fields.Integer()
-    created_at = fields.String()
+    date_created = fields.String()
 
     @post_dump(pass_many=True)
     def add_host_url(self, data, many, **kwargs):
