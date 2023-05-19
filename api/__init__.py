@@ -15,7 +15,7 @@ def create_app(configure=config_object['appcon']):
     migrate.init_app(app, db)
     api.init_app(app)
     # Enable CORS
-    CORS(app, resupports_credentials=True)
+    CORS(app, supports_credentials=True)
     cache.init_app(app)
     jwt.init_app(app)
 
