@@ -71,3 +71,20 @@ def GetLinks():
     # check_if_user_is_still_logged_in(current_user)
     links = Link.query.filter_by(user_id=current_user).all()
     return links
+
+
+@bp.route("/get-links")
+class GetLinks(MethodView):
+    @bp.response(200, GetLinks(many=True))
+    @jwt_required()
+    def get(self):
+        """Get the current user's dashboard"""
+        links = {}
+        current_user = get_jwt_identity()
+        user_links = Link.query.filter_by(user_id=current_user).all()
+        # for link in user_links:
+        #     links[link.url] = link.url
+        #     links[link.short_url] = link.short_url
+        #     links[link.visit] = link.visit
+        # return links
+        return user_links
