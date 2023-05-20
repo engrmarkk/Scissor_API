@@ -61,27 +61,3 @@ def qr_code(short_url):
     response = make_response(link.qr_code)
     response.headers.set("Content-Type", "image/jpeg")
     return response
-
-
-# @bp.route("/all-links")
-# @bp.response(200, GetLinksSchema(many=True))
-# @jwt_required()
-# @cache.cached(timeout=60)
-# def GetLinks():
-#     # Check if token is valid
-#     current_user = get_jwt_identity()
-#     # check_if_user_is_still_logged_in(current_user)
-#     links = Link.query.filter_by(user_id=current_user).all()
-#     return links, 200
-
-
-# @bp.route("/all-links")
-# class GetAllLinks(MethodView):
-#     @bp.response(200, GetLinksSchema(many=True))
-#     @jwt_required()
-#     @cache.cached(timeout=60)
-#     def get(self):
-#         """Get all links"""
-#         current_user = get_jwt_identity()
-#         links = Link.query.filter_by(user_id=current_user).all()
-#         return links
