@@ -9,13 +9,13 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # This is the configuration object that will be used by the application
 class Config:
     # This is the secret key for the application
-    SECRET_KEY = config("SECRET_KEY", "secretkey")
+    SECRET_KEY = config("SECRET_KEY", "secretkeyhujjiuiyfufjguhfhj")
     # This is the expiration minutes for the jwt access token
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=300)
     # This is the expiration days for the jwt refresh token
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     # This is the secret key for the jwt
-    JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret")
+    JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret;lkchjkvlv,lkjvkzkb")
 
     CACHE_TYPE = 'SimpleCache'
     CACHE_DEFAULT_TIMEOUT = 300
