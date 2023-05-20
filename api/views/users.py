@@ -2,7 +2,7 @@ from ..models import User, Link
 from flask_smorest import abort, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask.views import MethodView
-from ..schemas import UserSchema
+from ..schemas import UserSchema, UserDashboardSchema
 from ..extensions import cache
 
 bp = Blueprint("users", __name__, description="Operations on users")
@@ -22,7 +22,7 @@ class UsersResource(MethodView):
 
 @bp.route("/dashboard")
 class DashboardResource(MethodView):
-    @bp.response(200, UserSchema)
+    @bp.response(200, UserDashboardSchema)
     @jwt_required()
     def get(self):
         """Get the current user's dashboard"""
