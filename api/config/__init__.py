@@ -15,7 +15,7 @@ class Config:
     # This is the expiration days for the jwt refresh token
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     # This is the secret key for the jwt
-    JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret;lkchjkvlv,lkjvkzkb")
+    JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret;lkchjkvlvlkjvkzkb")
 
     CACHE_TYPE = 'SimpleCache'
     CACHE_DEFAULT_TIMEOUT = 300
@@ -71,6 +71,8 @@ class ProdConfig(Config):
 
 
 # This is the dictionary that contains the configuration object
-config_object = {"appcon": AppConfig,
+config_object = {
+                 "appcon": AppConfig,
                  "testcon": TestConfig,
-                 "prodcon": ProdConfig}
+                 "prodcon": ProdConfig
+                 }
