@@ -3,7 +3,7 @@ import random
 import string
 import qrcode
 from io import BytesIO
-from PIL import Image
+# from PIL import Image
 from datetime import datetime
 
 
