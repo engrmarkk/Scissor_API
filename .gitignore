@@ -114,7 +114,7 @@ env.bak/
 venv.bak/
 mail.txt
 scissor.db
-migrations/
+#migrations/
 *.db
 flask_session/
 
