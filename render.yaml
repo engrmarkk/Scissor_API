@@ -1,0 +1,7 @@
+version: 1
+buildCommand:
+  - pip install -r requirements.txt
+publish:
+  - version: 0
+    commands:
+      - flask db upgrade
