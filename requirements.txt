@@ -29,7 +29,8 @@ PyJWT==2.7.0
 pypng==0.20220715.0
 pytest==7.3.1
 python-decouple==3.8
-python-dotenv==1.0.0
+# python-dotenv==1.0.0
+python-dotenv==0.21.1
 qrcode==7.4.2
 six==1.16.0
 SQLAlchemy==2.0.12
