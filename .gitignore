@@ -60,9 +60,9 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
-scissor.sqlite3
+# scissor.sqlite3
 db.sqlite3-journal
-*.sqlite3
+# *.sqlite3
 # Flask stuff:
 instance/
 .webassets-cache
