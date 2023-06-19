@@ -22,6 +22,11 @@ class LinkTestCase(unittest.TestCase):
             password=sha256.hash("password")
         )
         db.session.add(user)
+        link = Link(
+            url="https://www.github.com",
+            user_id=1
+        )
+        db.session.add(link)
         db.session.commit()
 
     def tearDown(self):
@@ -48,3 +53,15 @@ class LinkTestCase(unittest.TestCase):
         response = self.client.post("/short-urls", json=data, headers=headers)
         self.assertEqual(response.status_code, 201)
         self.assertIn("short_url", response.json)
+
+    def test_dashboard(self):
+        # test for getting user dashboard
+        token = create_access_token(identity=1)
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        response = self.client.get("/dashboard", headers=headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json, dict)
+        self.assertIsInstance(response.json["user_links"], list)
+        self.assertEqual(len(response.json["user_links"]), 1)
