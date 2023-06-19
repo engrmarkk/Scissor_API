@@ -56,3 +56,9 @@ class UserTestCase(unittest.TestCase):
         response = self.client.post("/login", json=data)
         self.assertEqual(response.status_code, 200)
         self.assertIn("access_token", response.json)
+
+    def test_get_all_users(self):
+        # test for getting all users
+        response = self.client.get("/users")
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json, list)
