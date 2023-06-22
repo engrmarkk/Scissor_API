@@ -66,16 +66,16 @@ class LoginUserResource(MethodView):
     @bp.arguments(LoginSchema)
     def post(self, user):
         """Login a user"""
-        current_user = User.query.filter_by(email=user["email"].lower()).first()
-        if not current_user:
+        current_user_ = User.query.filter_by(email=user["email"].lower()).first()
+        if not current_user_:
             abort(404, message="User not found")
-        if not sha256.verify(user["password"], current_user.password):
+        if not sha256.verify(user["password"], current_user_.password):
             abort(401, message="Invalid password")
-        access_token = cache.get(current_user.id)
+        access_token = cache.get(current_user_.id)
         if not access_token:
-            access_token = create_access_token(identity=current_user.id)
-            cache.set(current_user.id, access_token, timeout=None)
-        refresh_token = create_refresh_token(identity=current_user.id)
+            access_token = create_access_token(identity=current_user_.id)
+            cache.set(current_user_.id, access_token, timeout=None)
+        refresh_token = create_refresh_token(identity=current_user_.id)
         return {"access_token": access_token, "refresh_token": refresh_token}
 
 
