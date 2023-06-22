@@ -1,4 +1,5 @@
 from ..models import Link
+from flask import Response
 from flask_smorest import abort, Blueprint
 from flask import redirect, make_response, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -63,3 +64,15 @@ def qr_code(short_url):
     response = make_response(link.qr_code)
     response.headers.set("Content-Type", "image/jpeg")
     return response
+
+
+@bp.route("/delete-url/<short_url>")
+@jwt_required()
+def delete_short_url(short_url):
+    """Delete Link"""
+    link = Link.query.filter_by(short_url=short_url).fisrt_or_404()
+    if not link:
+        abort(404, message="This url does not exist")
+    db.session.delete(link)
+    db.session.commit()
+    return Response({"message": "Deleted"})
