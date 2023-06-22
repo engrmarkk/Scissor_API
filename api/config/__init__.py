@@ -65,7 +65,7 @@ class TestConfig(Config):
 
 
 class ProdConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = uri
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI').replace("://", "ql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = config('DEBUG', False, cast=bool)
 
