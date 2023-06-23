@@ -386,25 +386,25 @@ This project was made possible by:
 
 <!-- Markdown Links & Images -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/engrmarkk/Scissor API.svg?style=for-the-badge
-[contributors-url]: https://github.com/engrmarkk/Scissor API/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/engrmarkk/Scissor API.svg?style=for-the-badge
-[forks-url]: https://github.com/engrmarkk/Scissor API/network/members
-[stars-shield]: https://img.shields.io/github/stars/engrmarkk/Scissor API.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/engrmarkk/Academia-API.svg?style=for-the-badge
+[contributors-url]: https://github.com/engrmarkk/Academia-API/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/engrmarkk/Academia-API.svg?style=for-the-badge
+[forks-url]: https://github.com/engrmarkk/Academia-API/network/members
+[stars-shield]: https://img.shields.io/github/stars/engrmarkk/Academia-API.svg?style=for-the-badge
 [stars-url]: https://github.com/engrmarkk/Academia_API/stargazers
-[issues-shield]: https://img.shields.io/github/issues/engrmarkk/Scissor API.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/engrmarkk/Academia-API.svg?style=for-the-badge
 [issues-url]: https://github.com/engrmarkk/Academia-APIissues
-[license-shield]: https://img.shields.io/github/license/engrmarkk/Scissor API.svg?style=for-the-badge
-[license-url]: https://github.com/engrmarkk/Scissor API/blob/main/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/engrmarkk/Academia-API.svg?style=for-the-badge
+[license-url]: https://github.com/engrmarkk/Academia-API/blob/main/LICENSE.txt
 [twitter-shield]: https://img.shields.io/badge/-@iamengrmark-1ca0f1?style=for-the-badge&logo=twitter&logoColor=white&link=https://twitter.com/iamengrmark
 [twitter-shield2]: https://img.shields.io/badge/-@GabrielKalango-1ca0f1?style=for-the-badge&logo=twitter&logoColor=white&link=https://twitter.com/GabrielKalango
 [twitter-url]: https://twitter.com/iamengrmark
+[postgres]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
 [twitter-url2]: https://twitter.com/GabrielKalango
 [Quiz_Api-screenshot]: static/images/screen-light.png
 [Quiz_Api-screenshot2]: static/images/screen-dark.png
 [python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [flask]: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
-[postgres]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
 [jinja]: https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black
 [html5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [css3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
