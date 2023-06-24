@@ -15,7 +15,7 @@ def create_app(configure=config_object['appcon']):
     migrate.init_app(app, db)
     api.init_app(app)
     # Enable CORS
-    CORS(app, supports_credentials=True)
+    CORS(app, resources={r"/*": {"origins": ["https://scissor-alpha.vercel.app", "http://localhost:3000"]}},supports_credentials=True)
     cache.init_app(app)
     jwt.init_app(app)
 
