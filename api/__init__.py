@@ -32,7 +32,7 @@ def create_app(configure=config_object['appcon']):
     def before_request():
         if request.method == 'OPTIONS':
             headers = {
-                'Access-Control-Allow-Origin': 'https://scissor-alpha.vercel.app',  # Replace with your frontend origin
+                'Access-Control-Allow-Origin': 'https://scissor-alpha.vercel.app, http://localhost:3000',  # Replace with your frontend origin
                 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 'Access-Control-Allow-Credentials': 'true'
