@@ -15,7 +15,7 @@ def create_app(configure=config_object['appcon']):
     migrate.init_app(app, db)
     api.init_app(app)
     # Enable CORS
-    CORS(app, resources={r"/*": {"origins": ["https://scissor-alpha.vercel.app", "http://localhost:3000"]}},supports_credentials=True)
+    CORS(app, supports_credentials=True)
     cache.init_app(app)
     jwt.init_app(app)
 
@@ -32,7 +32,7 @@ def create_app(configure=config_object['appcon']):
     def before_request():
         if request.method == 'OPTIONS':
             headers = {
-                'Access-Control-Allow-Origin': '*',  # Replace with your frontend origin
+                'Access-Control-Allow-Origin': 'http://localhost:3000',  # Replace with your frontend origin
                 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 'Access-Control-Allow-Credentials': 'true'
