@@ -66,11 +66,13 @@ def qr_code(short_url):
     return response
 
 
-@bp.route("/delete-url/<short_url>")
+@bp.route("/delete-url/<string:short_url>", methods=["POST"])
 @jwt_required()
 def delete_short_url(short_url):
     """Delete Link"""
-    link = Link.query.filter_by(short_url=short_url).fisrt_or_404()
+    # if len(short_url) > 5:
+    #     short_url = short_url[-5:]
+    link = Link.query.filter_by(short_url=short_url).first()
     if not link:
         abort(404, message="This url does not exist")
     db.session.delete(link)
