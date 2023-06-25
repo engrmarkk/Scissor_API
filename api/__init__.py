@@ -19,26 +19,27 @@ def create_app(configure=config_object['appcon']):
     cache.init_app(app)
     jwt.init_app(app)
 
-    # @app.after_request
-    # def after_request(response):
-    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    #     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    #     response.headers.add('Access-Control-Allow-Credentials', 'true')
-    #     response.headers.add('Access-Control-Allow-Origin', '*')
-    #     return response
+    @app.after_request
+    def after_request(response):
+        if request.method == 'OPTIONS':
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+            response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+            response.headers.add('Access-Control-Allow-Credentials', 'true')
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
     # Before each request, add CORS headers
-    @app.before_request
-    def before_request():
-        if request.method == 'OPTIONS':
-            headers = {
-                # 'Access-Control-Allow-Origin': 'http://localhost:3000',  # Replace with your frontend origin
-                'Access-Control-Allow-Origin': ' https://scissor-alpha.vercel.app',  # Replace with your frontend origin
-                'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                'Access-Control-Allow-Credentials': 'true'
-            }
-            return '', 204, headers
+    # @app.before_request
+    # def before_request():
+    #     if request.method == 'OPTIONS':
+    #         headers = {
+    #             # 'Access-Control-Allow-Origin': 'http://localhost:3000',  # Replace with your frontend origin
+    #             'Access-Control-Allow-Origin': ' https://scissor-alpha.vercel.app',  # Replace with your frontend origin
+    #             'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+    #             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    #             'Access-Control-Allow-Credentials': 'true'
+    #         }
+    #         return '', 204, headers
 
     @jwt.revoked_token_loader
     def revoked_token_callback(jwt_header, jwt_payload):
