@@ -14,6 +14,7 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=300)
     # This is the expiration days for the jwt refresh token
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+    RATELIMIT_STORAGE_URL = config("RATELIMIT_STORAGE_URL", "redis://localhost:6379/0")
     # This is the secret key for the jwt
     JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret;lkchjkvlvlkjvkzkb")
 
