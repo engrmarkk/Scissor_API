@@ -51,6 +51,7 @@ Flask
 Flask-Caching
 Flask-Cors
 Flask-JWT-Extended
+Flask-Limiter
 Flask-Migrate
 flask-smorest
 Flask-SQLAlchemy
