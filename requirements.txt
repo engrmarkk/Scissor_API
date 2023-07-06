@@ -74,6 +74,7 @@ pytest
 python-decouple
 python-dotenv
 qrcode
+redis
 six
 SQLAlchemy
 tomli
