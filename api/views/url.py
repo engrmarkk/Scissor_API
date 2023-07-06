@@ -8,7 +8,7 @@ from ..schemas import LinkSchema, GetLinksSchema
 from ..utils.url_validate import validate_url
 
 # from ..utils import check_if_user_is_still_logged_in
-from ..extensions import db, cache
+from ..extensions import db, cache, limiter
 
 
 bp = Blueprint("urls", __name__, description="Operations on urls")
@@ -19,6 +19,7 @@ class CreateShortUrl(MethodView):
     @bp.arguments(LinkSchema)
     # @bp.response(201, LinkSchema)
     @jwt_required()
+    @limiter.limit("10 per minute")
     def post(self, new_url):
         """Create a new short url"""
         current_user = get_jwt_identity()
