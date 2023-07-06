@@ -46,7 +46,7 @@
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#features">Features</a></li>
       </ul>
-      <li><a href="#demo">Demo</a></li>
+     <!-- <li><a href="#demo">Demo</a></li> -->
     </li>
     <li>
       <a href="#exposure">Exposure</a>
