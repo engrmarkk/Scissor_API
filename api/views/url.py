@@ -27,8 +27,8 @@ class CreateShortUrl(MethodView):
             abort(400, message="Invalid url")
         if not new_url["url"].startswith('http://') and not new_url["url"].startswith('https://'):
             new_url["url"] = 'http://' + new_url["url"]
-        if Link.query.filter_by(url=new_url["url"]).first():
-            abort(400, message="Url already exists")
+        if Link.query.filter_by(user_id=current_user, url=new_url["url"]).first():
+            abort(400, message="URL already exists for this user")
         link = Link(**new_url, user_id=current_user)
         link.save()
         response = {
