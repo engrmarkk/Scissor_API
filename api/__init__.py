@@ -1,4 +1,4 @@
-from .extensions import db, migrate, jwt, api, cache
+from .extensions import db, migrate, jwt, api, cache, limiter
 from .config import config_object
 from flask import Flask, jsonify, make_response, request
 from .models import User, Link, RevokedToken
@@ -6,6 +6,8 @@ from .auth import bp as auth_bp
 from .views.users import bp as users_bp
 from .views.url import bp as url_bp
 from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 
 def create_app(configure=config_object['appcon']):
@@ -18,6 +20,7 @@ def create_app(configure=config_object['appcon']):
     CORS(app, supports_credentials=True)
     cache.init_app(app)
     jwt.init_app(app)
+    limiter.init_app(app)
 
     # @app.after_request
     # def after_request(response):
