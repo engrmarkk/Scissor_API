@@ -110,9 +110,9 @@ def create_app(configure=config_object['appcon']):
     api.register_blueprint(users_bp)
     api.register_blueprint(url_bp)
 
-    @app.errorhandler(404)
-    def not_found(error):
-        return make_response(jsonify({"error": "Not found"}), 404)
+    # @app.errorhandler(404)
+    # def not_found(error):
+    #     return make_response(jsonify({"error": "Not found"}), 404)
 
     @app.shell_context_processor
     def make_shell_context():
