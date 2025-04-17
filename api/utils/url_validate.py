@@ -14,8 +14,8 @@ def validate_url(url):
     context = ssl._create_unverified_context()
 
     # Ensure the URL has a scheme (http or https)
-    if not url.startswith(('http://', 'https://')):
-        url = 'https://' + url  # Default to HTTPS for security
+    if not url.startswith(("http://", "https://")):
+        url = "https://" + url  # Default to HTTPS for security
 
     try:
         # Try opening the URL with a timeout
