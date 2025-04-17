@@ -1,5 +1,4 @@
-from marshmallow import Schema, ValidationError, \
-    validates_schema, fields
+from marshmallow import Schema, ValidationError, validates_schema, fields
 from .link import GetLinksSchema
 
 
@@ -19,13 +18,13 @@ class LoginSchema(Schema):
 
     @validates_schema
     def validate_password(self, data, **kwargs):
-        if not data['password']:
-            raise ValidationError('Password is required')
+        if not data["password"]:
+            raise ValidationError("Password is required")
 
     @validates_schema
     def validate_email(self, data, **kwargs):
-        if not data['email']:
-            raise ValidationError('Email is required')
+        if not data["email"]:
+            raise ValidationError("Email is required")
 
 
 class UserDashboardSchema(UserSchema):
