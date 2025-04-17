@@ -2,14 +2,14 @@ from ..extensions import db
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     first_name = db.Column(db.String(70), nullable=True)
     last_name = db.Column(db.String(70), nullable=True)
     email = db.Column(db.String(70), unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
-    user_links = db.relationship('Link', backref='user', lazy=True)
+    user_links = db.relationship("Link", backref="user", lazy=True)
 
     def __init__(self, username, password, email, first_name, last_name):
         self.username = username
@@ -19,7 +19,7 @@ class User(db.Model):
         self.last_name = last_name
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f"<User {self.username}>"
 
     def save(self):
         db.session.add(self)
