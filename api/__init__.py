@@ -10,7 +10,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 
-def create_app(configure=config_object['appcon']):
+def create_app(configure=config_object["appcon"]):
     app = Flask(__name__)
     app.config.from_object(configure)
     db.init_app(app)
@@ -34,15 +34,15 @@ def create_app(configure=config_object['appcon']):
     @app.before_request
     def before_request():
         print(request.method, f"regqist method from {request.url}")
-        if request.method == 'OPTIONS':
+        if request.method == "OPTIONS":
             headers = {
-                'Access-Control-Allow-Origin': 'http://localhost:3000',  # Replace with your frontend origin
+                "Access-Control-Allow-Origin": "http://localhost:3000",  # Replace with your frontend origin
                 # 'Access-Control-Allow-Origin': ['https://scissor-alpha.vercel.app', 'http://localhost:3000'],  # Replace with your frontend origin
-                'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                'Access-Control-Allow-Credentials': 'true'
+                "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Allow-Credentials": "true",
             }
-            return '', 204, headers
+            return "", 204, headers
 
     @jwt.revoked_token_loader
     def revoked_token_callback(jwt_header, jwt_payload):
@@ -117,6 +117,6 @@ def create_app(configure=config_object['appcon']):
 
     @app.shell_context_processor
     def make_shell_context():
-        return {'db': db, 'User': User, 'Link': Link}
+        return {"db": db, "User": User, "Link": Link}
 
     return app
