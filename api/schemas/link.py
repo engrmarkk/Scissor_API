@@ -24,8 +24,8 @@ class GetLinksSchema(Schema):
         if many:
             # If serializing multiple objects, update each object's short_url field
             for obj in data:
-                obj['short_url'] = host_url + obj['short_url']
+                obj["short_url"] = host_url + obj["short_url"]
         else:
             # If serializing a single object, update its short_url field
-            data['short_url'] = host_url + data['short_url']
+            data["short_url"] = host_url + data["short_url"]
         return data
