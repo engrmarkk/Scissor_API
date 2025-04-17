@@ -17,8 +17,9 @@ jwt = JWTManager()
 api = Api()
 cors = CORS()
 cache = Cache()
-limiter = Limiter(get_remote_address,
-                  storage_uri=os.getenv("REDIS_URL"),
-                  storage_options={"socket_connect_timeout": 30},
-                  strategy="fixed-window",  # or "moving-window"
-                  )
+limiter = Limiter(
+    get_remote_address,
+    storage_uri=os.getenv("REDIS_URL"),
+    storage_options={"socket_connect_timeout": 30},
+    strategy="fixed-window",  # or "moving-window"
+)

@@ -21,34 +21,33 @@ class Config:
     # This is the secret key for the jwt
     JWT_SECRET_KEY = config("JWT_SECRET_KEY", "secret;lkchjkvlvlkjvkzkb")
 
-    CACHE_TYPE = 'SimpleCache'
+    CACHE_TYPE = "SimpleCache"
     CACHE_DEFAULT_TIMEOUT = 300
 
     # the api title
-    API_TITLE = 'Scissor API'
-    API_VERSION = 'v1'
-    OPENAPI_VERSION = '3.0.2'
-    OPENAPI_URL_PREFIX = '/'
-    OPENAPI_JSON_PATH = 'openapi.json'
-    OPENAPI_REDOC_PATH = '/redoc'
-    OPENAPI_SWAGGER_UI_PATH = '/'
-    OPENAPI_SWAGGER_UI_URL = 'https://cdn.jsdelivr.net/npm/swagger-ui-dist/'
-    OPENAPI_SWAGGER_UI_VERSION = '3.23.11'
+    API_TITLE = "Scissor API"
+    API_VERSION = "v1"
+    OPENAPI_VERSION = "3.0.2"
+    OPENAPI_URL_PREFIX = "/"
+    OPENAPI_JSON_PATH = "openapi.json"
+    OPENAPI_REDOC_PATH = "/redoc"
+    OPENAPI_SWAGGER_UI_PATH = "/"
+    OPENAPI_SWAGGER_UI_URL = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    OPENAPI_SWAGGER_UI_VERSION = "3.23.11"
     OPENAPI_SWAGGER_UI_JSONEDITOR = True
     PROPAGATE_EXCEPTIONS = True
     # the swagger ui configuration for authorization
     API_SPEC_OPTIONS = {
-        'security': [{"bearerAuth": []}],
-        'components': {
-            "securitySchemes":
-                {
-                    "bearerAuth": {
-                        "type": "http",
-                        "scheme": "bearer",
-                        "bearerFormat": "JWT"
-                    }
+        "security": [{"bearerAuth": []}],
+        "components": {
+            "securitySchemes": {
+                "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT",
                 }
-        }
+            }
+        },
     }
 
 
@@ -70,14 +69,10 @@ class TestConfig(Config):
 
 class ProdConfig(Config):
     # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("://", "ql://", 1)
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    DEBUG = config('DEBUG', False, cast=bool)
+    DEBUG = config("DEBUG", False, cast=bool)
 
 
 # This is the dictionary that contains the configuration object
-config_object = {
-                 "appcon": AppConfig,
-                 "testcon": TestConfig,
-                 "prodcon": ProdConfig
-                 }
+config_object = {"appcon": AppConfig, "testcon": TestConfig, "prodcon": ProdConfig}
