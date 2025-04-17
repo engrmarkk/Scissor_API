@@ -19,13 +19,10 @@ class LinkTestCase(unittest.TestCase):
             last_name="zack",
             username="marc_zack",
             email="mark_zarc@yahoo.com",
-            password=sha256.hash("password")
+            password=sha256.hash("password"),
         )
         db.session.add(user)
-        link = Link(
-            url="https://www.github.com",
-            user_id=1
-        )
+        link = Link(url="https://www.github.com", user_id=1)
         db.session.add(link)
         db.session.commit()
 
@@ -46,9 +43,7 @@ class LinkTestCase(unittest.TestCase):
         token = create_access_token(identity=1)
 
         # set headers with JWT token
-        headers = {
-            "Authorization": f"Bearer {token}"
-        }
+        headers = {"Authorization": f"Bearer {token}"}
 
         response = self.client.post("/short-urls", json=data, headers=headers)
         self.assertEqual(response.status_code, 201)
@@ -57,9 +52,7 @@ class LinkTestCase(unittest.TestCase):
     def test_dashboard(self):
         # test for getting user dashboard
         token = create_access_token(identity=1)
-        headers = {
-            "Authorization": f"Bearer {token}"
-        }
+        headers = {"Authorization": f"Bearer {token}"}
         response = self.client.get("/dashboard", headers=headers)
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, dict)
