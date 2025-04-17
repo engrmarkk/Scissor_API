@@ -18,7 +18,7 @@ class UserTestCase(unittest.TestCase):
             last_name="doe",
             username="johndoe",
             email="doejoe@yahoo.com",
-            password=sha256.hash("password")
+            password=sha256.hash("password"),
         )
         db.session.add(user)
         db.session.commit()
