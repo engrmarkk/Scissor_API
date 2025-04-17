@@ -25,8 +25,10 @@ class CreateShortUrl(MethodView):
         current_user = get_jwt_identity()
         if not validate_url(new_url["url"]):
             abort(400, message="Invalid url")
-        if not new_url["url"].startswith('http://') and not new_url["url"].startswith('https://'):
-            new_url["url"] = 'http://' + new_url["url"]
+        if not new_url["url"].startswith("http://") and not new_url["url"].startswith(
+            "https://"
+        ):
+            new_url["url"] = "http://" + new_url["url"]
         if Link.query.filter_by(user_id=current_user, url=new_url["url"]).first():
             abort(400, message="URL already exists for this user")
         link = Link(**new_url, user_id=current_user)
